@@ -4,7 +4,7 @@
 
 # Use bash for inline if-statements in test target
 SHELL:=bash
-OWNER:=jupyter
+OWNER:=zgsolucoes
 ARCH:=$(shell uname -m)
 
 # Need to list the images in build dependency order
@@ -25,7 +25,7 @@ ALL_IMAGES:=$(ALL_STACKS)
 
 help:
 # http://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
-	@echo "jupyter/docker-stacks"
+	@echo "zgsolucoes/docker-stacks"
 	@echo "====================="
 	@echo "Replace % with a stack directory name (e.g., make build/minimal-notebook)"
 	@echo
