@@ -10,3 +10,11 @@ RUN conda install --quiet --yes \
     'keras-gpu=2.0*' && \
     conda clean -tipsy && \
     fix-permissions $CONDA_DIR
+
+    
+# Extra packages for Summer School
+RUN conda install --quiet --yes \
+    'gensim' \
+    'nltk' \
+    'tqdm' \
+    'imageio'
