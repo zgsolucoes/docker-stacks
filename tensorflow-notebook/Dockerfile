@@ -15,6 +15,9 @@ RUN conda install --quiet --yes \
 # Extra packages for Summer School
 RUN conda install --quiet --yes \
     'gensim' \
+    'boto3' \
     'nltk' \
     'tqdm' \
     'imageio'
+
+RUN python -m nltk.downloader all
