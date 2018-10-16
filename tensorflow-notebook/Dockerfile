@@ -6,18 +6,11 @@ LABEL maintainer="Jupyter Project <jupyter@googlegroups.com>"
 
 # Install Tensorflow
 RUN conda install --quiet --yes \
-    'tensorflow-gpu=1.3*' \
-    'keras-gpu=2.0*' && \
+    'tensorflow=1.5*' \
+    'keras=2.1*' && \
     conda clean -tipsy && \
-    fix-permissions $CONDA_DIR
+    fix-permissions $CONDA_DIR && \
+    fix-permissions /home/$NB_USER
 
-    
 # Extra packages for Summer School
-RUN conda install --quiet --yes \
-    'gensim' \
-    'boto3' \
-    'nltk' \
-    'tqdm' \
-    'imageio'
-
-RUN python -m nltk.downloader all
+RUN conda install --quiet --yes 'opencv'
