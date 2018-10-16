@@ -30,10 +30,10 @@ RUN echo "LC_TYPE=en_US.UTF-8" >> /etc/default/locale
 RUN locale-gen en_US en_US.UTF-8
 
 #build and install Tini for ppc64le
-RUN wget https://github.com/krallin/tini/archive/v0.10.0.tar.gz && \
-    tar zxvf v0.10.0.tar.gz && \
-    rm -rf v0.10.0.tar.gz
-WORKDIR tini-0.10.0/
+RUN wget https://github.com/krallin/tini/archive/v0.18.0.tar.gz && \
+    tar zxvf v0.18.0.tar.gz && \
+    rm -rf v0.18.0.tar.gz
+WORKDIR tini-0.18.0/
 RUN cmake . && make install
 RUN mv ./tini /usr/local/bin/tini  && \
     chmod +x /usr/local/bin/tini
@@ -55,7 +55,7 @@ RUN useradd -m -s /bin/bash -N -u $NB_UID $NB_USER && \
     mkdir -p $CONDA_DIR && \
     chown $NB_USER $CONDA_DIR
 
-USER $NB_USER
+USER $NB_UID
 
 # Setup jovyan home directory
 RUN mkdir /home/$NB_USER/work && \
@@ -87,7 +87,7 @@ WORKDIR /home/$NB_USER/work
 RUN echo "ALL            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 # Configure container startup
-ENTRYPOINT ["tini", "--"]
+ENTRYPOINT ["tini", "-g", "--"]
 CMD ["start-notebook.sh"]
 
 # Add local files as late as possible to avoid cache busting
@@ -98,4 +98,4 @@ COPY jupyter_notebook_config.py /home/$NB_USER/.jupyter/
 RUN chown -R $NB_USER:users /home/$NB_USER/.jupyter
 
 # Switch back to jovyan to avoid accidental container runs as root
-USER $NB_USER
+USER $NB_UID
