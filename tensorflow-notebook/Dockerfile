@@ -13,4 +13,4 @@ RUN conda install --quiet --yes \
     fix-permissions /home/$NB_USER
 
 # Extra packages for Summer School
-RUN conda install --quiet --yes 'opencv'
+RUN conda install --quiet --yes 'opencv' 'six'
